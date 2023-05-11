@@ -42,7 +42,25 @@ Constraints:
 using namespace std;
 
 // } Driver Code Ends
-class Solution {
+
+class Solution {//Unoptimised approach (will give TLE)
+  public:
+    vector<long long> lcmAndGcd(long long A , long long B) {
+        // code here
+        vector<long long> ans;
+        long long minNo = min(A, B);
+        long long gcd=1;
+        for(int i=2; i<=minNo; i++){
+            if(A%i==0 and B%i==0) gcd=i;
+        }
+        long long lcm = (A * B)/gcd;
+        ans.push_back(lcm);
+        ans.push_back(gcd);
+        return ans;
+    }
+};
+
+class Solution {//optimised code
   public:
   long long gcd(long long A , long long B){
         if(B==0){

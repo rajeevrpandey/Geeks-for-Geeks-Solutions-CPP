@@ -62,23 +62,19 @@ class Solution {//Unoptimised approach (will give TLE)
 
 class Solution {//optimised code
   public:
-  long long gcd(long long A , long long B){
-        if(B==0){
-            return A;
-        }
-        return gcd(B, A%B);
+    long long gcd(long long A, long long B){
+        if(B==0) return A;
+        gcd(B, A%B);
     }
     vector<long long> lcmAndGcd(long long A , long long B) {
         // code here
-        vector<long long> v;
-        long long g, lcm;
-        g = gcd(A, B);
-        lcm = (A*B)/g;
-        v.push_back(lcm);
-        v.push_back(g);
-        return v;
+        vector<long long> ans;
+        long long g = gcd(A, B);
+        long long lcm = (A * B)/g;
+        ans.push_back(lcm);
+        ans.push_back(g);
+        return ans;
     }
-    
 };
 
 //{ Driver Code Starts.

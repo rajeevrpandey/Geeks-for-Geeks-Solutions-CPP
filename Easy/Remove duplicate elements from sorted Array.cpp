@@ -43,19 +43,35 @@ using namespace std;
 // } Driver Code Ends
 //User function template for C++
 
-class Solution{
+class Solution{//Using set properties (naive approach)
 public:
     int remove_duplicate(int a[],int n){
         // code here
-        int result=1;
-        for(int i=1;i<n;i++) {
-            if(a[i-1]!=a[i]) {
-                a[result]=a[i];
-                result++;
+        set<int> st;
+        for(int i=0; i<n; i++){
+            st.insert(a[i]);
+        }
+        int i=0;
+        for(auto it:st){
+            a[i]=it;
+            i++;
+        }
+        return i;
+    }
+};
+
+class Solution{//Using 2 pointers (optimized approach)
+public:
+    int remove_duplicate(int a[],int n){
+        // code here
+        int i=0;
+        for(int j=1; j<n; j++){
+            if(a[i]!=a[j]){
+                i++;
+                a[i]=a[j];
             }
         }
-        return result;
-        
+        return i+1;
     }
 };
 

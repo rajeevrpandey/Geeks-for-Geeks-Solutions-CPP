@@ -53,44 +53,96 @@ Constraints:
 using namespace std; 
 
 // } Driver Code Ends
-class Solution{
+
+class Solution{//Using unordered map properties
     public:
     //Function to count the frequency of all elements from 1 to N in the array.
     void frequencyCount(vector<int>& arr,int N, int P)
     { 
         // code here
-        // int x = max(N,P);
-        // long long a[x] = {0};
-        // for(long long i=0; i<x; i++){
-        //     a[arr[i]-1]++;
-        // }
-        // for(long long i=0; i<x; i++){
-        //     arr[i]=a[i];
-        // }
-        
-        // // cout << endl;
-        int x = max(N + 1, P + 1);
-
-        int a[x] = {0};
-    
-        for (int i = 0; i < N; i++)
-        {
-    
-            a[arr[i]] += 1;
-    
+        unordered_map<int, int> mp;
+        for(int i=0; i<N; i++){
+            mp[arr[i]]++;
         }
-    
-        for (int i = 0; i < N; i++)
-        {
-            {
-                arr[i] = a[i + 1];
-    
+        for(int i=0; i<N; i++){
+            if(mp.find(i+1)!=mp.end()){
+                arr[i] = mp[i+1];
             }
-    
+            else{
+                arr[i]=0;
+            }
+        }
+        
+};
+
+
+class Solution{//Using an extra array for counting
+    public:
+    //Function to count the frequency of all elements from 1 to N in the array.
+    void frequencyCount(vector<int>& arr,int N, int P)
+    { 
+        int x = max(N+1, P+1);
+        int a[x] = {0};
+        for (int i = 0; i < N; i++){
+            a[arr[i]] += 1;
+	    }
+        for (int i = 0; i < N; i++){
+            arr[i] = a[i + 1];
         }
     }
 };
 
+	
+class Solution{//Optimised solution
+    public:
+    //Function to count the frequency of all elements from 1 to N in the array.
+    void frequencyCount(vector<int>& arr,int N, int P)
+    { 
+        // code here
+        int i = 0;
+        while (i<N)
+        {
+            // If this element is already processed,
+            // then nothing to do
+            if (arr[i] <= 0 || arr[i]>N || arr[i]>P)
+            {
+                i++;
+                continue;
+            }
+     
+            // Find index corresponding to this element
+            // For example, index for 5 is 4
+            int elementIndex = arr[i]-1;
+     
+            // If the elementIndex has an element that is not
+            // processed yet, then first store that element
+            // to arr[i] so that we don't lose anything.
+            if (arr[elementIndex] > 0)
+            {
+                arr[i] = arr[elementIndex];
+     
+                // After storing arr[elementIndex], change it
+                // to store initial count of 'arr[i]'
+                arr[elementIndex] = -1;
+            }
+            else
+            {
+                // If this is NOT first occurrence of arr[i],
+                // then decrement its count.
+                arr[elementIndex]--;
+     
+                // And initialize arr[i] as 0 means the element
+                // 'i+1' is not seen so far
+                arr[i] = 0;
+                i++;
+            }
+        }
+        for(int i=0;i<N;i++) {
+            if(arr[i] < 0) arr[i] = -arr[i];
+            else arr[i]=0;
+        }
+    }
+};
 
 //{ Driver Code Starts.
 

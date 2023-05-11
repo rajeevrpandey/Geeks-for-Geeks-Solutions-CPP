@@ -70,8 +70,18 @@ int main()
 }
 // } Driver Code Ends
 
+int missingNumber(int A[], int N)//Using sum of N integers property
+{
+    // Your code goes here
+    int sumOfN = (N * (N+1)) / 2;
+    int sum=0;
+    for(int i=0; i<N-1; i++){
+        sum += A[i];
+    } 
+    return sumOfN - sum;
+}
 
-int missingNumber(int A[], int N)
+int missingNumber(int A[], int N)//Using XOR property
 {
     // Your code goes here
     int ans =0;

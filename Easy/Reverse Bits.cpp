@@ -40,7 +40,7 @@ Constraints:
 using namespace std;
 
 // } Driver Code Ends
-class Solution {
+class Solution {//naive approach (using extra space)
   public:
     long long reversedBits(long long X) {
         // code here
@@ -66,6 +66,24 @@ class Solution {
             i--;
         }
         return dec;
+    }
+};
+
+
+class Solution {//best approach
+  public:
+    long long reversedBits(long long X) {
+        // code here
+        unsigned int num = X;//since unsigned int uses 32bit but long long uses 64bit
+        unsigned int NO_OF_BITS = sizeof(num) * 8;
+        unsigned int reverse_num = 0;
+        int i;
+        for (i = 0; i < NO_OF_BITS; i++) {//If a bit at ith position is set in the i/p no.
+                                            //then set the bit at (NO_OF_BITS-1)-i in o/p
+            if ((num & (1 << i)))
+                reverse_num |= 1 << ((NO_OF_BITS - 1) - i);
+        }
+        return reverse_num;
     }
 };
 

@@ -93,7 +93,9 @@ public:
                 search(A, low, mid);
         }
     
-        // If mid is odd
+        // If mid is odd element before to mid is
+        // same as mid, then output element lies on
+        // right side, else on left side
         else {
             if (A[mid] == A[mid - 1])
                 search(A, mid + 1, high);

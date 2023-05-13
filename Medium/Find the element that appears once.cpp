@@ -66,6 +66,8 @@ public:
 
 
 class Solution{// A Binary Search based function (O(log n) time)
+	/*All elements before the required have the first occurrence at even index (0, 2, ..) and the next occurrence at odd index (1, 3, ...).
+	And all elements after the required elements have the first occurrence at an odd index and the next occurrence at an even index. */
 public:	
 	int search(int A[], int N){
 	    //code
